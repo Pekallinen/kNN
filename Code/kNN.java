@@ -10,10 +10,10 @@ public class kNN {
     public static void main(String[] args) {
     	// Training data used to classify new cases
     	List<List<String>> trainingData = getDataFromFile(args[0]);
-	normalizeAll(trainingData);
+	Preprocess.normalizeAll(trainingData);
     	// Data that will be classified
     	List<List<String>> unclassifiedData = getDataFromFile(args[1]);
-	normalizeAll(unclassifiedData);
+	Preprocess.normalizeAll(unclassifiedData);
     	// Number of neighbors
     	int k = Integer.parseInt(args[2]);
 
