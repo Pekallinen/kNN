@@ -52,7 +52,7 @@ public class Preprocess {
 	}
 	// this functions normalizes all attributes that could be normalized
 	public static int normalizeAll(List<List<String>> dataTrain, List<List<String>> dataTest){
-		int nbAttr = dataTrain.get(0).size();// number of attributes
+		int nbAttr = dataTest.get(0).size();// number of attributes
 		for(int attr=0; attr<nbAttr; attr++){
 			normalize(dataTrain, dataTest, attr);
 		}

@@ -12,8 +12,8 @@ public class kNN {
     	List<List<String>> trainingData = getDataFromFile(args[0]);
     	// Data that will be classified
     	List<List<String>> unclassifiedData = getDataFromFile(args[1]);
-	// Data normalization
-	Preprocess.normalizeAll(trainingData, unclassifiedData);
+		// Data normalization
+		Preprocess.normalizeAll(trainingData, unclassifiedData);
     	// Number of neighbors
     	int k = Integer.parseInt(args[2]);
 
