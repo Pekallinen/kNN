@@ -77,9 +77,10 @@ public class kNN {
     			distance += (d1-d2)*(d1-d2);
     		}
     		// If the attribute isn't a number add 1.0 to the distance if the values are not equal
+            // If at least one of the values is missing ("?") add 1.0 to the distance
     		// TODO: Take the added value as an argument or use a different measure
     		else {
-    			if(!item1.get(i).equals(item2.get(i))) {
+                if(item1.get(i).equals("?") || !item1.get(i).equals(item2.get(i))) {
     				distance += 1.0;
     			}
     		}
