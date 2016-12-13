@@ -76,9 +76,19 @@ public class kNN {
     			double d2 = Double.parseDouble(item2.get(i));
     			distance += (d1-d2)*(d1-d2);
     		}
+		// Missing values in case only isDouble(item1.get(i)) is true or only isDouble(item2.get(i)) is true
+		// it considers the maximum distance from 1 or 0 given that the data is normalized
+		else if(isDouble(item1.get(i))) {
+			double d1 = Double.parseDouble(item1.get(i));
+			distance += max(1-d1, d1-0);
+		}
+		else if(isDouble(item2.get(i))) {
+			double d2 = Double.parseDouble(item2.get(i));
+			distance += max(1-d2, d2-0);
+		}
     		// If the attribute isn't a number add 1.0 to the distance if the values are not equal
     		// TODO: Take the added value as an argument or use a different measure
-    		else {
+		else {
     			if(!item1.get(i).equals(item2.get(i))) {
     				distance += 1.0;
     			}
