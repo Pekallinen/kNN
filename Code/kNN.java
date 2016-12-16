@@ -4,16 +4,16 @@ import java.util.*;
 // EXAMPLE USAGE:
 // java kNN iris.data iris_unclassified.data 3
 // java kNN car.data car_unclassified.data 5
+// Datasets gathered from http://archive.ics.uci.edu/ml/index.html
 
-// Data sets gathered from http://archive.ics.uci.edu/ml/index.html
 public class kNN {
     public static void main(String[] args) {
     	// Training data used to classify new cases
     	List<List<String>> trainingData = getDataFromFile(args[0]);
     	// Data that will be classified
     	List<List<String>> unclassifiedData = getDataFromFile(args[1]);
-		// Data normalization
-		Preprocess.normalizeAll(trainingData, unclassifiedData);
+    	// Data normalization
+    	Preprocess.normalizeAll(trainingData, unclassifiedData);
     	// Number of neighbors
     	int k = Integer.parseInt(args[2]);
 
@@ -64,21 +64,22 @@ public class kNN {
     	return mostCommon(kNearestList);
     }
 
-    // Compares two items and returns the euclidean distance of them
+    // Compares two items and returns the Heterogeneous Euclidean-Overlap Metric distance of them
     public static double getDistance(List<String> item1, List<String> item2) {
     	List<String> distanceItem = new ArrayList<String>();
     	double distance = 0.0;
     	
-    	// Calculate the euclidean distance
+    	// Calculate HEOM
     	for(int i = 0; i < item2.size(); i++) {
+    		// Quantitative values
     		if(isDouble(item1.get(i)) && isDouble(item2.get(i))) {
     			double d1 = Double.parseDouble(item1.get(i));
     			double d2 = Double.parseDouble(item2.get(i));
-    			distance += (d1-d2)*(d1-d2);
+    			distance += (d1-d2)*(d1-d2); // Data normalization was done beforehand
     		}
+    		// Qualitative and missing values
     		// If the attribute isn't a number add 1.0 to the distance if the values are not equal
-            // If at least one of the values is missing ("?") add 1.0 to the distance
-    		// TODO: Take the added value as an argument or use a different measure
+    		// If at least one of the values is missing ("?") add 1.0 to the distance
     		else {
                 if(item1.get(i).equals("?") || !item1.get(i).equals(item2.get(i))) {
     				distance += 1.0;
